@@ -51,6 +51,12 @@ const verifyJWT = (req, res, next) => {
 	});
 };
 
+app.get("/test", (req, res) => {
+	db("users")
+		.returning("*")
+		.then((data) => res.json(data));
+});
+
 const generateAccess = (user) => jwt.sign(user, access, { expiresIn: "5m" });
 
 app.post("/token", (req, res) => {
